@@ -47,7 +47,6 @@ Launch Magisk 30.7 via adb:
 Eventually, this will be made into an "ACE" framework to support custom payloads for this and other affected chipsets.  
 For now, it is a standalone bootloader unlock tool.
 
----
 
 ## Credits
 
