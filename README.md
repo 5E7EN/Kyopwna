@@ -32,7 +32,7 @@ This process will **NOT** factory reset your device!
 1. Next, we need to enter a flashable sahara mode. There are two ways to go about this:
     1. Kyocera: use SD card marker to enter SBL1 sahara A004 mode
         - Plug a microSD card into your computer
-        - Copy the `NOTPUSH` file found in the "microSD/" folder onto the SD card
+        - Copy the microSD/`NOTPUSH` file onto the SD card
         - Eject the SD card and insert it into your Kyocera
         - Reconnect battery and press power button. The device's outer LED should be steady green. Continue below #2 (`flasher.py` script).    
     2. Universal (does not work on my Kyocera): `adb reboot edl`, or use an EDL cable
