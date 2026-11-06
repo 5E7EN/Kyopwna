@@ -14,9 +14,19 @@ Bootloader unlock for Kyocera E4610 (and others)
 
 This guide is for the E4610 only. Other devices with the MSM8909 SoC are supported, but the payload needs to be modified accordingly.  
 If you want to see your device added, please open an issue.  
-This guide assumes you are running Linux and are comfortable with its command line.
+This guide assumes you are running Linux and are comfortable with its command line.  
+This process will **NOT** factory reset your device!
+
+## Requirements
+
+- E4610
+- microSD card (w/ adapter)
+- Micro USB to USB-A data cable
+- Linux (VM with USB passthrough works too)
+- ADB & fastboot
 
 ## Process  
+Please be meticulous in following the instructions. Limited support will be provided.  
 
 0. With device on, enable OEM unlocking and ADB in developer menu.
 1. Next, we need to enter a flashable sahara mode. There are two ways to go about this:
@@ -24,27 +34,25 @@ This guide assumes you are running Linux and are comfortable with its command li
         - Plug a microSD card into your computer
         - Copy the `NOTPUSH` file found in the "microSD/" folder onto the SD card
         - Eject the SD card and insert it into your Kyocera
-        - Reconnect battery and press power button. The device's outer LED should be steady green. Continue below #2 (`sbl-flasher.py` script).    
+        - Reconnect battery and press power button. The device's outer LED should be steady green. Continue below #2 (`flasher.py` script).    
     2. Universal (does not work on my Kyocera): `adb reboot edl`, or use an EDL cable
 2. Once in sahara mode, flash the included "patched" partitions:
     1. Kyocera: with the device connected in SBL1 sahara mode, run the SBL flasher script:
         - `cd <path-to-this-folder>`
         - Install libusb and also `pip install -r requirements.txt` (pyusb)
-        - `sudo python3 sbl-flasher.py`
+        - `sudo python3 flasher.py`
         - Device will reboot into EDL 9008 mode after it successfully flashes both patched images.
         - **Remove the microSD card from your Kyocera, reconnect the battery, and press power button.** This will bring you back into EDL 9008 mode.
     2. Universal: _Coming soon™_
-3. The intention with the above is to brick the device so that it consistently falls into EDL 9008 mode.
-4. Next, with the device in EDL 9008 mode, hold the POWER button and simulatenously run `sudo python3 exploit.py`. The device should boot Android normally.
-5. Connect to ADB, and run `adb reboot bootloader`
-6. The device will reboot into EDL 9008 mode. Hold the POWER button and simulatenously run `sudo python3 exploit.py` once again. The device will boot into fastboot mode.
-7. Connect to fastboot, and run:
+3. The intention with the above is to brick the device so that it reliably falls into EDL 9008 mode.
+4. Next, with the device in EDL 9008 mode, hold the POWER button and simultaneously run `sudo python3 exploit.py`. The device will boot into fastboot mode.
+5. Connect to fastboot, and run:
     - `fastboot oem unlock`. THEN,
     - `fastboot flash sbl1 sbl1_stock.mbn`. THEN,
     - `fastboot flash aboot aboot_stock.mbn`. THEN,
     - `fastboot flash boot boot_patched-magisk30_7.img`. THEN,
     - `fastboot reboot`
-8. The device will now reboot normally with orange state screen - indicating successful unlock!
+6. The device will now reboot normally with orange state screen - indicating successful unlock!
 
 Launch Magisk 30.7 via adb:
 `adb shell monkey -p com.topjohnwu.magisk -c android.intent.category.LAUNCHER 1`
