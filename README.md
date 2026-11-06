@@ -26,7 +26,7 @@ This process will **NOT** factory reset your device!
 - ADB & fastboot
 
 ## Process  
-Please be meticulous in following the instructions. Limited support will be provided.  
+### Please be meticulous in following the instructions. Limited support will be provided.  
 
 0. With device on, enable OEM unlocking and ADB in developer menu.
 1. Next, we need to enter a flashable sahara mode. There are two ways to go about this:
