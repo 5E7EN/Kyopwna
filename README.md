@@ -1,10 +1,14 @@
-# Kyopwna
+<h1 align='center'>
+Kyopwna
+</h1>
+
+<p align='center'>
+Bootloader unlock for Kyocera E4610 (and others)
+</p>
 
 <p align="center">
     <img src="https://img.shields.io/badge/built-BS%22D-brightgreen" />
 </p>
-
-Bootloader unlock for Kyocera E4610 (and others)
 
 ---
 
