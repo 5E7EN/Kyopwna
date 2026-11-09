@@ -22,8 +22,8 @@ import usb.util
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 IMAGES = [
-    ("aboot", "aboot_patched.mbn"),
-    ("sbl1",  "sbl1_patched.mbn"),
+    ("aboot", "../images/aboot_patched.mbn"),
+    ("sbl1",  "../images/sbl1_patched.mbn"),
 ]
 
 
