@@ -72,15 +72,16 @@ Launch Magisk 30.7 via adb:
 
 ## Backup
 
-Before flashing anything, back up your stock `aboot` and `sbl1` partitions. You will need them in case the process goes sour for some reason.
+Before flashing anything, back up your stock `aboot` and `sbl1` partitions. You will want them in case the process goes sour for some reason.
 
 1. Kyocera: enter SBL1 sahara mode using the microSD method described in step 1.i above, then run the backup script:
     - `sudo python3 scripts/backup.py`
     - This will dump those partitions from your device and save them to a `BACKUP/` folder in the project root.
 2. Universal: with the device in EDL 9008 mode, use bkerler's EDL client:
     - `mkdir BACKUP`
-    - `edl --loader images/KyopwnaLoader.mbn r aboot BACKUP/aboot.mbn`
     - `edl --loader images/KyopwnaLoader.mbn r sbl1 BACKUP/sbl1.mbn`
+    - `edl --loader images/KyopwnaLoader.mbn r aboot BACKUP/aboot.mbn`
+    - `edl --loader images/KyopwnaLoader.mbn r boot BACKUP/boot.mbn`
 
 ---
 

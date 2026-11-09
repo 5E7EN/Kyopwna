@@ -21,7 +21,7 @@ import usb.util
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 BACKUP_DIR = os.path.join(SCRIPT_DIR, "..", "BACKUP")
 
-PARTITIONS_TO_BACKUP = ["aboot", "sbl1"]
+PARTITIONS_TO_BACKUP = ["sbl1", "aboot", "boot"]
 
 KC_VID = 0x0482
 KC_PID = 0x0AA4
