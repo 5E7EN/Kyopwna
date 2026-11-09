@@ -41,7 +41,7 @@ This process will **NOT** factory reset your device!
         - Plug a microSD card into your computer
         - Copy the microSD/`NOTPUSH` file onto the SD card
         - Eject the SD card and insert it into your Kyocera
-        - Reconnect battery and press power button. The device's outer LED should be steady green. Continue below #2 (`flasher.py` script).    
+        - Reconnect battery and press power button. The device's outer LED should be steady green.
     2. Universal (does not work on my Kyocera): `adb reboot edl`, or use an EDL cable
 2. Once in sahara mode, flash the included "patched" partitions:
     1. Kyocera: with the device connected in SBL1 sahara mode, run the SBL flasher script:
@@ -50,7 +50,7 @@ This process will **NOT** factory reset your device!
         3. `sudo python3 scripts/flasher.py`
         4. Device will reboot into EDL 9008 mode after it successfully flashes both patched images.
         5. **Remove the microSD card from your Kyocera, reconnect the battery, and press power button.** This will bring you back into EDL 9008 mode.
-    2. Universal: use bkerler's EDL client (w/ the included firehose loader, or any)
+    2. Universal: use bkerler's EDL client (w/ the included firehose loader, or any):
         1. With the device in EDL 9008 mode, run the `sudo python3 scripts/firehose-deauther.py` script.
             - This payload will neutralize auth and re-enum USB. This will allow you to use any firehose loader, regardless of its signature. The included loader - `images/KyopwnaLoader.mbn` - supports EL3-level capabilities, including peek/poke.
             - **NOTE:** In most cases, the eMMC will enforce write-protection for boot related partitions. This is noticable when trying to write to such partitions and receiving a “read back verify” failure. If this occurs, append the `--disable-wp` flag to the script. This only needs to be done once. THEN,
@@ -77,11 +77,17 @@ Before flashing anything, back up your stock `sbl1`, `aboot`, and `boot` partiti
 1. Kyocera: enter SBL1 sahara mode using the microSD method described in step 1.i above, then run the backup script:
     - `sudo python3 scripts/backup.py`
     - This will dump those partitions from your device and save them to a `BACKUP/` folder in the project root.
-2. Universal: with the device in EDL 9008 mode, use bkerler's EDL client:
+    - Remove the microSD card from your Kyocera, reconnect the battery, and turn the phone back on.
+    - Continue from the beginning of the [Process](#process) above.
+2. Universal: use bkerler's EDL client (w/ the included firehose loader, or any):
     - `mkdir BACKUP`
+    - With the device in EDL 9008 mode, run the `sudo python3 scripts/firehose-deauther.py` script.
+        - See notes under step 2.ii.a above for important info. THEN,
     - `edl --loader images/KyopwnaLoader.mbn r sbl1 BACKUP/sbl1.mbn`
     - `edl --loader images/KyopwnaLoader.mbn r aboot BACKUP/aboot.mbn`
     - `edl --loader images/KyopwnaLoader.mbn r boot BACKUP/boot.mbn`
+    - `edl reset`
+    - Continue from the beginning of the [Process](#process) above.
 
 ---
 
