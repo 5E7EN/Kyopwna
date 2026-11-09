@@ -32,7 +32,7 @@ This process will **NOT** factory reset your device!
 ## Process  
 ### Please be meticulous in following the instructions. Limited support will be provided.  
 
-> [!IMPORTANT]
+> [!CAUTION]
 > **[Back up your stock partitions](#backup)** before continuing!
 
 0. With device on, enable OEM unlocking and ADB in developer menu.
