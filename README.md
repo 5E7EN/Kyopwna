@@ -42,18 +42,18 @@ This process will **NOT** factory reset your device!
     2. Universal (does not work on my Kyocera): `adb reboot edl`, or use an EDL cable
 2. Once in sahara mode, flash the included "patched" partitions:
     1. Kyocera: with the device connected in SBL1 sahara mode, run the SBL flasher script:
-        - `cd <path-to-this-folder>`
-        - Install libusb and also `pip install -r requirements.txt` (pyusb)
-        - `sudo python3 flasher.py`
-        - Device will reboot into EDL 9008 mode after it successfully flashes both patched images.
-        - **Remove the microSD card from your Kyocera, reconnect the battery, and press power button.** This will bring you back into EDL 9008 mode.
+        1. `cd <path-to-this-folder>`
+        2. Install libusb and also `pip install -r requirements.txt` (pyusb)
+        3. `sudo python3 flasher.py`
+        4. Device will reboot into EDL 9008 mode after it successfully flashes both patched images.
+        5. **Remove the microSD card from your Kyocera, reconnect the battery, and press power button.** This will bring you back into EDL 9008 mode.
     2. Universal: use bkerler's EDL client (w/ the included firehose loader, or any)
-        - Run the `sudo python3 firehose-deauther.py` script.
+        1. Run the `sudo python3 firehose-deauther.py` script.
             - This payload will neutralize auth and re-enum USB. This will allow you to use any firehose loader, regardless of its signature. The included loader - `KyopwnaLoader.mbn` - supports EL3-level capabilities, including peek/poke.
             - **NOTE:** In most cases, the eMMC will enforce write-protection for boot related partitions. This is noticable when trying to write to such partitions and receiving a “read back verify” failure. If this occurs, append the `--disable-wp` flag to the script. This only needs to be done once. THEN,
-        - `edl --loader KyopwnaLoader.mbn w aboot aboot_patched.mbn`. THEN,
-        - `edl --loader KyopwnaLoader.mbn w sbl1 sbl1_patched.mbn`. THEN,
-        - `edl reset`
+        2. `edl --loader KyopwnaLoader.mbn w aboot aboot_patched.mbn`. THEN,
+        3. `edl --loader KyopwnaLoader.mbn w sbl1 sbl1_patched.mbn`. THEN,
+        4. `edl reset`
 3. The intention with the above is to brick the device so that it reliably falls into EDL 9008 mode.
 4. Next, with the device in EDL 9008 mode, hold the POWER button and simultaneously run `sudo python3 exploit.py`. The device will boot into fastboot mode.
 5. Connect to fastboot, and run:
