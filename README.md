@@ -47,8 +47,9 @@ This process will **NOT** factory reset your device!
         - `sudo python3 flasher.py`
         - Device will reboot into EDL 9008 mode after it successfully flashes both patched images.
         - **Remove the microSD card from your Kyocera, reconnect the battery, and press power button.** This will bring you back into EDL 9008 mode.
-    2. Universal: use bkerler's EDL client (w/ the included firehose loader - `KyopwnaLoader.mbn`)
-        - Run the `sudo python3 firehose-deauther.py` script. THEN,
+    2. Universal: use bkerler's EDL client (w/ the included firehose loader, or any)
+        - Run the `sudo python3 firehose-deauther.py` script.
+            - This payload will neutralize auth and re-enum USB. This will allow you to use any firehose loader, regardless of its signature. The included loader - `KyopwnaLoader.mbn` - supports EL3-level capabilities, including peek/poke.
             - **NOTE:** In most cases, the eMMC will enforce write-protection for boot related partitions. This is noticable when trying to write to such partitions and receiving a “read back verify” failure. If this occurs, append the `--disable-wp` flag to the script. This only needs to be done once. THEN,
         - `edl --loader KyopwnaLoader.mbn w aboot aboot_patched.mbn`. THEN,
         - `edl --loader KyopwnaLoader.mbn w sbl1 sbl1_patched.mbn`. THEN,
