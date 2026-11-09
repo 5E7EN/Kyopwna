@@ -31,7 +31,9 @@ This process will **NOT** factory reset your device!
 
 ## Process  
 ### Please be meticulous in following the instructions. Limited support will be provided.  
-#### **[Back up your stock partitions](#backup)** before continuing!
+
+> [!IMPORTANT]
+> **[Back up your stock partitions](#backup)** before continuing!
 
 0. With device on, enable OEM unlocking and ADB in developer menu.
 1. Next, we need to enter a flashable sahara mode. There are two ways to go about this:
