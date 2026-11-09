@@ -72,7 +72,7 @@ Launch Magisk 30.7 via adb:
 
 ## Backup
 
-Before flashing anything, back up your stock `aboot` and `sbl1` partitions. You will want them in case the process goes sour for some reason.
+Before flashing anything, back up your stock `sbl1`, `aboot`, and `boot` partitions. You will want them in case the process goes sour for some reason.
 
 1. Kyocera: enter SBL1 sahara mode using the microSD method described in step 1.i above, then run the backup script:
     - `sudo python3 scripts/backup.py`
