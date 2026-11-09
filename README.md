@@ -31,6 +31,7 @@ This process will **NOT** factory reset your device!
 
 ## Process  
 ### Please be meticulous in following the instructions. Limited support will be provided.  
+#### **[Back up your stock partitions](#backup)** before continuing!
 
 0. With device on, enable OEM unlocking and ADB in developer menu.
 1. Next, we need to enter a flashable sahara mode. There are two ways to go about this:
@@ -48,7 +49,7 @@ This process will **NOT** factory reset your device!
         4. Device will reboot into EDL 9008 mode after it successfully flashes both patched images.
         5. **Remove the microSD card from your Kyocera, reconnect the battery, and press power button.** This will bring you back into EDL 9008 mode.
     2. Universal: use bkerler's EDL client (w/ the included firehose loader, or any)
-        1. Run the `sudo python3 scripts/firehose-deauther.py` script.
+        1. With the device in EDL 9008 mode, run the `sudo python3 scripts/firehose-deauther.py` script.
             - This payload will neutralize auth and re-enum USB. This will allow you to use any firehose loader, regardless of its signature. The included loader - `images/KyopwnaLoader.mbn` - supports EL3-level capabilities, including peek/poke.
             - **NOTE:** In most cases, the eMMC will enforce write-protection for boot related partitions. This is noticable when trying to write to such partitions and receiving a “read back verify” failure. If this occurs, append the `--disable-wp` flag to the script. This only needs to be done once. THEN,
         2. `edl --loader images/KyopwnaLoader.mbn w aboot images/aboot_patched.mbn`. THEN,
@@ -66,6 +67,18 @@ This process will **NOT** factory reset your device!
 
 Launch Magisk 30.7 via adb:
 `adb shell monkey -p com.topjohnwu.magisk -c android.intent.category.LAUNCHER 1`
+
+## Backup
+
+Before flashing anything, back up your stock `aboot` and `sbl1` partitions. You will need them in case the process goes sour for some reason.
+
+1. Kyocera: enter SBL1 sahara mode using the microSD method described in step 1.i above, then run the backup script:
+    - `sudo python3 scripts/backup.py`
+    - This will dump those partitions from your device and save them to a `BACKUP/` folder in the project root.
+2. Universal: with the device in EDL 9008 mode, use bkerler's EDL client:
+    - `mkdir BACKUP`
+    - `edl --loader images/KyopwnaLoader.mbn r aboot BACKUP/aboot.mbn`
+    - `edl --loader images/KyopwnaLoader.mbn r sbl1 BACKUP/sbl1.mbn`
 
 ---
 
